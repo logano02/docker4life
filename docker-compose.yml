@@ -1,0 +1,43 @@
+# version: '3.8'
+
+# services:
+#   my_service:
+#     image: mynametheng/tpc-landing-page:tpc-landing-page-uat
+#     ports:
+#       - "3000:3000"
+services:
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NODE_VERSION: 18
+        MODE: development
+    environment:
+      NODE_ENV: dev
+    ports:
+      - "3001:3000"
+
+  app-uat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NODE_VERSION: 18
+        MODE: uat
+    environment:
+      NODE_ENV: uat
+    ports:
+      - "3002:3000"
+
+  app-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NODE_VERSION: 18
+        MODE: production
+    environment:
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
