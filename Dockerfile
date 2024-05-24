@@ -3,15 +3,15 @@
 # FROM --platform=linux/amd64/v4 node:18.18.2-alpine AS deps
 # WORKDIR /usr/src/app
 # COPY package*.json ./
-# COPY yarn.lock ./
-# RUN yarn install --frozen-lockfile --network-timeout 100000
+# # COPY yarn.lock ./
+# RUN npm install --frozen-lockfile --network-timeout 100000
 
 # # Stage 2: Build the application
 # FROM --platform=linux/amd64/v4 node:18.18.2-alpine AS builder
 # WORKDIR /usr/src/app
 # COPY --from=deps /usr/src/app/node_modules ./node_modules
 # COPY . .
-# RUN yarn build
+# RUN npm run build
 
 # # Stage 3: Run the application
 # FROM --platform=linux/amd64/v4 node:18.18.2-alpine
@@ -31,14 +31,14 @@ WORKDIR /usr/src/app
 
 # Copy package.json, yarn.lock, and install dependencies
 COPY package*.json ./
-COPY yarn.lock ./
-RUN yarn install --frozen-lockfile --network-timeout 100000
+# COPY yarn.lock ./
+RUN npm install --frozen-lockfile --network-timeout 100000
 
 # Copy the rest of the application code
 COPY . .
 
 # Build the application
-RUN yarn build
+RUN npm run build
 
 # Expose the application port
 EXPOSE 3000
