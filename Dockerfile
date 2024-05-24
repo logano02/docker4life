@@ -44,5 +44,4 @@ RUN yarn build
 EXPOSE 3000
 
 # Run the application
-# CMD ["npx", "serve", "-l", "3000", "-s", "dist"]
-CMD [ "yarn dev"]
+CMD ["npx", "serve", "-l", "3000", "-s", "dist"]
